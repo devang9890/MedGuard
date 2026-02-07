@@ -33,3 +33,67 @@ exports.getDashboardStats = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getNearExpirySupplies = async (req, res) => {
+  try {
+    const today = new Date();
+    const next30Days = new Date();
+    next30Days.setDate(today.getDate() + 30);
+
+    const nearExpiry = await Supply.find({
+      expiryDate: { $gte: today, $lte: next30Days }
+    }).populate("medicineId supplierId");
+
+    res.json(nearExpiry);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getSupplierRisk = async (req, res) => {
+  try {
+    const suppliers = await Supplier.find();
+
+    const riskData = await Promise.all(
+      suppliers.map(async (supplier) => {
+        const rejectedSupplies = await Supply.countDocuments({
+          supplierId: supplier._id,
+          complianceStatus: "REJECT"
+        });
+
+        const warnings = await Supply.countDocuments({
+          supplierId: supplier._id,
+          complianceStatus: "WARNING"
+        });
+
+        const riskScore = rejectedSupplies * 2 + warnings;
+
+        return {
+          supplier: supplier.name,
+          riskScore
+        };
+      })
+    );
+
+    res.json(riskData);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getComplianceTrend = async (req, res) => {
+  try {
+    const supplies = await Supply.aggregate([
+      {
+        $group: {
+          _id: "$complianceStatus",
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+
+    res.json(supplies);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
