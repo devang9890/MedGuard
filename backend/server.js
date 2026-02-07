@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const testRoutes = require("./routes/testRoutes");
+const supplierRoutes = require("./routes/supplierRoutes");
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/test", testRoutes);
+app.use("/api/suppliers", supplierRoutes);
 
 // Health check route
 app.get("/", (req, res) => {
