@@ -7,6 +7,7 @@ const testRoutes = require("./routes/testRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
 const supplyRoutes = require("./routes/supplyRoutes");
 const medicineRoutes = require("./routes/medicineRoutes");
+const alertRoutes = require("./routes/alertRoutes");
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use("/api/test", testRoutes);
 app.use("/api/suppliers", supplierRoutes);
 app.use("/api/supplies", supplyRoutes);
 app.use("/api/medicines", medicineRoutes);
+app.use("/api/alerts", alertRoutes);
 
 // Health check route
 app.get("/", (req, res) => {
