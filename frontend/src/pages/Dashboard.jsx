@@ -1,19 +1,36 @@
 import { useEffect, useState } from "react";
-import { getDashboardStats } from "../api/dashboardApi";
+import {
+  getDashboardStats,
+  getSupplierRisk,
+  getNearExpiry
+} from "../api/dashboardApi";
+import Layout from "../components/Layout";
+import CompliancePie from "../components/CompliancePie";
+import SupplierRiskChart from "../components/SupplierRiskChart";
+import NearExpiryTable from "../components/NearExpiryTable";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({});
+  const [riskData, setRiskData] = useState([]);
+  const [nearExpiry, setNearExpiry] = useState([]);
 
   useEffect(() => {
-    const fetchStats = async () => {
-      const res = await getDashboardStats();
-      setStats(res.data);
+    const fetchData = async () => {
+      const statsRes = await getDashboardStats();
+      setStats(statsRes.data);
+
+      const riskRes = await getSupplierRisk();
+      setRiskData(riskRes.data);
+
+      const expiryRes = await getNearExpiry();
+      setNearExpiry(expiryRes.data);
     };
-    fetchStats();
+
+    fetchData();
   }, []);
 
   return (
-    <div className="p-6">
+    <Layout>
       <h1 className="text-2xl font-bold mb-6">MedGuard Dashboard</h1>
 
       <div className="grid grid-cols-4 gap-4">
@@ -37,6 +54,22 @@ export default function Dashboard() {
           <p className="text-xl font-bold">{stats.rejected}</p>
         </div>
       </div>
-    </div>
+
+      <div className="mt-10 grid grid-cols-2 gap-6">
+        <div className="bg-white p-4 rounded shadow">
+          <h2 className="font-semibold mb-3">Compliance Overview</h2>
+          <CompliancePie data={stats} />
+        </div>
+
+        <div className="bg-white p-4 rounded shadow">
+          <h2 className="font-semibold mb-3">Supplier Risk</h2>
+          <SupplierRiskChart data={riskData} />
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <NearExpiryTable data={nearExpiry} />
+      </div>
+    </Layout>
   );
 }
