@@ -15,13 +15,19 @@ export default function Login() {
 		setLoading(true);
 
 		try {
+			console.log("Attempting login with:", { email, password });
 			const res = await loginUser({ email, password });
+			console.log("Login response:", res.data);
 			const { token, user } = res.data;
 			localStorage.setItem("token", token);
 			localStorage.setItem("user", JSON.stringify(user));
-			navigate("/");
+			console.log("Login successful, redirecting to dashboard");
+			navigate("/dashboard");
 		} catch (err) {
-			setError(err?.response?.data?.message || "Login failed");
+			console.error("Login error:", err);
+			const errorMessage = err?.response?.data?.message || err?.message || "Login failed";
+			setError(errorMessage);
+			console.error("Error message set to:", errorMessage);
 		} finally {
 			setLoading(false);
 		}
