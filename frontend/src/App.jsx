@@ -6,6 +6,8 @@ import Supplies from "./pages/Supplies";
 import Alerts from "./pages/Alerts";
 import Trust from "./pages/Trust";
 import Corruption from "./pages/Corruption";
+import Priority from "./pages/Priority";
+import NationalMap from "./pages/NationalMap";
 import Login from "./pages/Login";
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/trust" element={<Trust />} />
         <Route path="/corruption" element={<Corruption />} />
+        <Route path="/priority" element={<Priority />} />
+        <Route path="/national-map" element={<NationalMap />} />
       </Routes>
     </BrowserRouter>
   );

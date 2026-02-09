@@ -12,6 +12,8 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const trustRoutes = require("./routes/trustRoutes");
 const corruptionRoutes = require("./routes/corruptionRoutes");
 const fakeMedicineRoutes = require("./routes/fakeMedicineRoutes");
+const usagePriorityRoutes = require("./routes/usagePriorityRoutes");
+const mapRoutes = require("./routes/mapRoutes");
 
 dotenv.config();
 
@@ -33,7 +35,8 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/trust", trustRoutes);
 app.use("/api/corruption", corruptionRoutes);
 app.use("/api/fake-medicine", fakeMedicineRoutes);
-
+app.use("/api/usage-priority", usagePriorityRoutes);
+app.use("/api/map", mapRoutes);
 // Health check route
 app.get("/", (req, res) => {
   res.status(200).send("🚀 MedGuard API running...");
