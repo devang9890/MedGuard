@@ -5,6 +5,7 @@ import Medicines from "./pages/Medicines";
 import Supplies from "./pages/Supplies";
 import Alerts from "./pages/Alerts";
 import Trust from "./pages/Trust";
+import Corruption from "./pages/Corruption";
 import Login from "./pages/Login";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/supplies" element={<Supplies />} />
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/trust" element={<Trust />} />
+        <Route path="/corruption" element={<Corruption />} />
       </Routes>
     </BrowserRouter>
   );

@@ -10,6 +10,8 @@ const medicineRoutes = require("./routes/medicineRoutes");
 const alertRoutes = require("./routes/alertRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const trustRoutes = require("./routes/trustRoutes");
+const corruptionRoutes = require("./routes/corruptionRoutes");
+const fakeMedicineRoutes = require("./routes/fakeMedicineRoutes");
 
 dotenv.config();
 
@@ -29,6 +31,8 @@ app.use("/api/medicines", medicineRoutes);
 app.use("/api/alerts", alertRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/trust", trustRoutes);
+app.use("/api/corruption", corruptionRoutes);
+app.use("/api/fake-medicine", fakeMedicineRoutes);
 
 // Health check route
 app.get("/", (req, res) => {

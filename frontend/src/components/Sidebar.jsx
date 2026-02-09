@@ -12,6 +12,7 @@ export default function Sidebar() {
 				<Link to="/supplies" className="hover:text-green-400">Supplies</Link>
 				<Link to="/alerts" className="hover:text-green-400">Alerts</Link>
 				<Link to="/trust" className="hover:text-green-400">Trust Score</Link>
+				<Link to="/corruption" className="hover:text-green-400">Corruption</Link>
 			</nav>
 		</div>
 	);
