@@ -4,6 +4,7 @@ import Suppliers from "./pages/Suppliers";
 import Medicines from "./pages/Medicines";
 import Supplies from "./pages/Supplies";
 import Alerts from "./pages/Alerts";
+import Trust from "./pages/Trust";
 import Login from "./pages/Login";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/medicines" element={<Medicines />} />
         <Route path="/supplies" element={<Supplies />} />
         <Route path="/alerts" element={<Alerts />} />
+        <Route path="/trust" element={<Trust />} />
       </Routes>
     </BrowserRouter>
   );

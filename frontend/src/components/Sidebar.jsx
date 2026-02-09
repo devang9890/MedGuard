@@ -11,6 +11,7 @@ export default function Sidebar() {
 				<Link to="/medicines" className="hover:text-green-400">Medicines</Link>
 				<Link to="/supplies" className="hover:text-green-400">Supplies</Link>
 				<Link to="/alerts" className="hover:text-green-400">Alerts</Link>
+				<Link to="/trust" className="hover:text-green-400">Trust Score</Link>
 			</nav>
 		</div>
 	);
